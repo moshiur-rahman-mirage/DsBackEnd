@@ -6,9 +6,9 @@ import helmet from "helmet";
 import morgan from "morgan";
 import mongoose from "mongoose";
 import kpiRoutes from "./routes/kpi.js";
-import KPI from "./models/KPI.js";
-import { kpis } from "./data/data.js";
-
+import productsRoute from "./routes/product.js";
+import {products} from "./data/data.js"
+import Product from "./models/Product.js";
 dotenv.config();
 
 const app = express();
@@ -21,11 +21,21 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cors());
+
+
+app.use(cors({
+  origin: [
+      'http://localhost:5173',
+     
+      "*"
+
+  ],
+  credentials: true
+}));
 
 // Routes
 app.use("/kpi", kpiRoutes);
-
+app.use("/product",productsRoute);
 console.log("Hello");
 
 // MongoDB Connection
@@ -34,7 +44,7 @@ mongoose
   .then(async () => {
     
     // await mongoose.connection.db.dropDatabase();
-    // await KPI.insertMany(kpis);
+    // await Product.insertMany(products);
 
     // Start the server
     app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
