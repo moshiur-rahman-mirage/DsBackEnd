@@ -33,8 +33,8 @@ mongoose
   .connect(process.env.MONGO_URL,{ dbName: process.env.DB_NAME },{ useNewUrlParser: true, useUnifiedTopology: true, writeConcern: { w: "majority" } })
   .then(async () => {
     
-    await mongoose.connection.db.dropDatabase();
-    await KPI.insertMany(kpis);
+    // await mongoose.connection.db.dropDatabase();
+    // await KPI.insertMany(kpis);
 
     // Start the server
     app.listen(PORT, () => console.log(`Server running at port ${PORT}`));
