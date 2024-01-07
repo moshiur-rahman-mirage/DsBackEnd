@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors({
   origin: [
       'http://localhost:5173',
-      'https://findashboard-830d9.web.app/',     
+      'https://findashboard-830d9.web.app',     
       "*"
 
   ],
